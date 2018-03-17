@@ -15,13 +15,13 @@ df = pd.read_csv('/Users/emrahceyhan/Desktop/SpringBoardArchieve/CapstoneProject
 df.info()
 df.head()
 df.shape()
-# Looking for NaN
+#Looking for NaN
 df.isnull().any()
 #Check the unique columns in the data to find which are categorical
 nunique=df.nunique()
 nunique= nunique.sort_values()
 nunique
-# Delete columns having the value of '1 or any same values for all observation'. 
+#Delete columns having the value of '1 or any same values for all observation'. 
 cols = ["Over18", "StandardHours", "EmployeeCount"]
 for i in cols:
     del df[i]
@@ -46,11 +46,13 @@ df_yes=df[df.Attrition == 'Yes']
 print(df_yes.head())
 df_yes.shape
 
-# Histogram of YearsAtCompany Vs Department
+#Histogram of YearsAtCompany Vs Department
 sns.barplot(x = 'Department', y = 'YearsAtCompany', data = df_yes)
 plt.show()
 fig,ax = plt.subplots(4,3, figsize=(12,13)) 
-# 'ax' has references to all the four axes
+
+#Display multiple distribution plots
+#'ax' has references to all the four axes
 plt.suptitle("Distribution of various individual factors", fontsize=20)
 sns.distplot(df_yes['TotalWorkingYears'], ax = ax[0,0]) 
 sns.distplot(df_yes['YearsAtCompany'], ax = ax[0,1]) 
@@ -82,10 +84,8 @@ plt.show()
 #Compare average and median monthly rate of men and women who were left the job
 avg_male_rate = np.mean(df_yes.MonthlyRate[df.Gender == 'Male']) 
 avg_female_rate = np.mean(df_yes.MonthlyRate[df.Gender == 'Female'])
-
 med_male_rate = np.median(df_yes.MonthlyRate[df.Gender == 'Male']) 
 med_female_rate = np.median(df_yes.MonthlyRate[df.Gender == 'Female'])
-
 plt.bar([1,4],[avg_male_rate, med_male_rate]) 
 plt.bar([2,5],[avg_female_rate, med_female_rate], color = 'y') 
 plt.xticks([2,5],['Average Monthly Rate','Median Monthly Rate']) 
